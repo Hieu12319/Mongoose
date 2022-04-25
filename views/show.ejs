@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("partials/head.ejs") %>
+<body>
+    
+    <nav>
+        <a href="./<%= index %>/delete">Delete Product</a>
+        <a href="/">Back to Index</a>
+        <a href="./<%= index %>/edit">Edit Pokemon Product</a>
+    </nav>
+     <h1><%= products.name %></h1>
+    <h2><img src="<%= products.img%>"></h2>
+        <p>
+            <ul>Description: <%=products.description%></ul>
+            <ul>Price: <%=products.price%></ul>
+            <ul>QTY: <%=products.quantity%></ul>
+        </p>
+    
+
+
+</h3> 
+
+
+   
+  
+    
+    
+</body>

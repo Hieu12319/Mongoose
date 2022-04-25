@@ -14,9 +14,7 @@
     <ul>
       <% for( let i = 0; i < allProducts.length; i++) { %>
         <a href="/<%=i%>"><img src="<%= allProducts[i].img %>"></a>   
-        <form>
-            <form action="/pokemon/<%=i; %>?_method=DELETE" method="POST"></form>
-        </form>
+    
       <% } %>
 
     </ul>
