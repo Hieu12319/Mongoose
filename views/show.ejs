@@ -4,21 +4,24 @@
 <body>
     
     <nav>
-        <a href="./<%= index %>/delete">Delete Product</a>
+        <a href="./<%= index %>">Delete Product</a>
         <a href="/">Back to Index</a>
-        <a href="./<%= index %>/edit">Edit Pokemon Product</a>
+        <a href="./<%= index %>/edit">Edit  Product</a>
     </nav>
-     <h1><%= products.name %></h1>
-    <h2><img src="<%= products.img%>"></h2>
+     <h1><%= Product.name %></h1>
+    <h2><img src="<%= Product.img%>"></h2>
         <p>
-            <ul>Description: <%=products.description%></ul>
-            <ul>Price: <%=products.price%></ul>
-            <ul>QTY: <%=products.quantity%></ul>
+            <ul>Description: <%=Product.description%></ul>
+            <ul>Price: <%=Product.price%></ul>
+            <ul>QTY: <%= Product.qty %>
+                
+        </ul>
         </p>
-    
+    <form>
+        <input type="button" name="name" value="Buy Now" >
+</form>
 
 
-</h3> 
 
 
    

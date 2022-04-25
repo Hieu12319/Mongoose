@@ -1,6 +1,6 @@
 //Dependencies
 
-const mongoose = require("./connection") //import the already connected object
+const mongoose = require("../controllers/connection") //import the already connected object
 
 //Schemas & Models
 
