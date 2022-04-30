@@ -8,13 +8,13 @@
     <h2>
         
   <img src="<%= Prod.img %>"></h2>
-  <div class="container"
-  <form action="/<%= index %>?_method=PUT" method="post">
+  <div class="container">
+  <form action="/<%=Prod._id %>?_method=PUT" method="post">
     Name: <input type="text" name="name" placeholder="<%= Prod.name %>" > <br/>
-    Description: <input type="text" name="name" placeholder="Add New Description"> <br/>
-    Image Link: <input type="text" name="name" placeholder="Enter Image Link URL HERE"> <br/>
-    Price: <input type="text" name="name" placeholder="Enter New Price"> <br/>
-    QTY: <input type ="number" name="name" placeholder="Amount"><br/>
+    Description: <input type="text" name="Description" placeholder="Add New Description"> <br/>
+    Image Link: <input type="text" name="img" placeholder="Enter Image Link URL HERE"> <br/>
+    Price: <input type="text" name="Price" placeholder="Enter New Price"> <br/>
+    QTY: <input type ="number" name="qty" placeholder="Amount"><br/>
 
-    <input type="submit" value="Update Product" id="submit-button"></button>
-</form>
+    <input type="submit" value="Update Product"> 
+</div>

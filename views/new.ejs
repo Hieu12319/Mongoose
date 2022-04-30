@@ -2,17 +2,16 @@
 <html lang="en">
     <%- include("partials/head.ejs") %>
 <body>
-   
-    <div class="container">
-        <h1> <a href="/"> Back to Index Page</a></h1>
-        <form action="/ ?_method=PUT" method="post">
+       <h1> <a href="/"> Back to Index Page</a></h1>
+    <div class="new-form">
+        <form action="/" method="post">
             Name: <input type="text" name="name" placeholder="Enter Name" > <br/>
-            Description: <input type="text" name="name" placeholder="Add New Description"> <br/>
-            Image Link: <input type="text" name="name" placeholder="Enter Image Link URL HERE"> <br/>
-            Price: <input type="text" name="name" placeholder="Enter New Price"> <br/>
-            QTY: <input type ="number" name="name" placeholder="Amount"><br/>
+            Description: <input type="text" name="description" placeholder="Add New Description"> <br/>
+            Image Link: <input type="text" name="img" placeholder="Enter Image Link URL HERE"> <br/>
+            Price: <input type="text" name="price" placeholder="Enter New Price"> <br/>
+            QTY: <input type ="number" name="qty" placeholder="Amount"><br/>
         
-            <input type="submit" name="" value="Add Product" />
+            <input type="submit" id="btn-add" value="Add Product">
         </form>
         </div>
         </body>

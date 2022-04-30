@@ -4,23 +4,27 @@
 <body>
     
     <nav>
-        <a href="./<%= index %>">Delete Product</a>
+        
         <a href="/">Back to Index</a>
         <a href="./<%= index %>/edit">Edit  Product</a>
     </nav>
-     <h1><%= Product.name %></h1>
-    <h2><img src="<%= Product.img%>"></h2>
+     <h1><%= prod.name %></h1>
+    <h2><img src="<%= prod.img%>"></h2>
         <p>
-            <ul>Description: <%=Product.description%></ul>
-            <ul>Price: <%=Product.price%></ul>
-            <ul>QTY: <%= Product.qty %>
-                
-        </ul>
+            <ul>Description: <%=prod.description%></ul>
+            <ul>Price: <%=prod.price%></ul>
+            <ul>QTY: <%= prod.qty %> </ul>
+            
+          <% if(prod.qty > 0){ %>
+            <form action="/<%=prod._id%>?_method=PUT" method="POST">
+              <button class="buy-btn" type="submit" name="qty" value="<%=prod.qty-1%>">BUY</button>
+            </form> <br>
+            <% }else{ %>
+                <h3>OUT OF STOCK</h3>
+              <% } %>  
         </p>
-    <form>
-        <input type="button" name="name" value="Buy Now" >
-</form>
-
+        <form action="/<%=prod._id%>?_method=DELETE" method="POST">
+            <input class="delete-btn" type="submit" value="DELETE" />
 
 
 

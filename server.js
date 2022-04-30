@@ -2,14 +2,15 @@ require('dotenv').config();
 const express = require('express');
 const res = require('express/lib/response');
 const mongoose = require("./controllers/connection.js");
-const app = express();
+
 const PORT = process.env.PORT;
 const connectionController = require('./controllers/connection')
+const bodyParser = require('body-parser')
 
 const methodOverride = require('method-override')
 const product = require("./models/seed.js");
 const Products = require('./models/products.js');
-
+const app = express();
 //middleware
 
 app.use(express.urlencoded({ extended: true}));
@@ -19,76 +20,99 @@ mongoose.connect(process.env.DATABASE_URL, {
     useUnifiedTopology: true,  
 });
 
+// app.use(bodyParser.json())
+
 //routes
-app.get('/seed', (req, res) => {
-    Products.deleteMany({}, (err, deletedProducts) => {
-        Products.create(product, (err, data) => {
-            res.redirect('/');
+//index
+app.get("/",(req,res)=> {
+    Products.find({}, (err, allProducts)=>{
+        res.render("index.ejs",{
+            allProducts: allProducts,
         });
     });
 });
-app.get("/",(req,res)=> {
-    res.render('index.ejs', {allProducts: product})
-})
+app.get('/seed', (req, res) => {
+     Products.deleteMany({}, (err, deletedProducts) => {
+         Products.create(product, (err, data) => {
+             res.redirect('/');
+         });
+     });
+ }); 
+
+ 
 
 //new page
 app.get("/new",(req, res) => {
     res.render('new.ejs');
 });
 
-app.get('/:id', (req, res) => {
-        res.render('show.ejs', {Product: product[req.params.id],
-        index: req.params.id})
-});
 
 
-// create - im having trouble making the new item render onto the index
-    app.post('/', (req, res) => {
-        req.body.completed = !!req.body.completed;
-        Products.create(req.body, (err, createdProducts) => {
-            if (err) {
-                console.log(err);
-                res.send(err);
-            } else {
-                res.redirect('/');
-            };
-        });
-    });
-
-    
-//delete - also when i hit the delete button it doesnt render to the index page.
+//delete -
 app.delete("/:id", (req, res) => {
     Products.findByIdAndDelete(req.params.id, (err, deletedProducts) => {  
         res.redirect("/");
 
     });
-});
+});   
 
-   //edit route
-
-app.get("/:id/edit",(req, res) => {
-              Products.findById(req.params.id, (err, Products) => {
-            res.render('edit.ejs', {Prod: product[req.params.id],
-            index: req.params.id});
-        });
-    });
-
-    //update route - when i console.log req.params.id i get the correct info but it will not render the information
+//update route - when i console.log req.params.id i get the correct info but it will not render the information
 app.put('/:id', (req, res)=> {
    
     Products.findByIdAndUpdate(
-        req.params.id, 
+        req.params.id,
+        console.log(Products),
         req.body,(err, updatedProducts)=>{
-        res.redirect("/")
+            if(err) {
+                console.log(err);
+        res.redirect(`/${req.params.id}`)}
     })
 
 })
 
-//show route
+// create 
+app.post('/', (req, res) => {
+ Products.create(req.body, (err, createdProducts) => {
+    if (err) {
+         res.send(err); 
+           }else {
+             res.redirect("/");
+             }
+    });
+})
+
+//edit route
+
+app.get("/:id/edit",(req, res) => {
+     Products.findById(req.params.id, (err, Prod) => {
+            res.render('edit.ejs', {Prod});
+        });
+    });
+ 
+// // Buy Route
+// app.put('/buy/:id', (req, res) => {
+//     Products.findById(req.params.id, (err, foundProducts) => {
+//         let currentQty = foundProducts.qty
+//         let buyQty = req.body.qty
+//         if (currentQty - buyQty < 0 ) return res.send('You cant buy that many.')
+//         let updatedQty = currentQty - buyQty
+//         req.body.qty = updatedQty
+//         Products.findByIdAndUpdate(req.params.id, req.body, (err, boughtProducts) => {
+//             if (err) console.log(err);
+//             res.redirect(`./${req.params.id}`);
+//         });
+//     })
+// });
+
+
+
+
+
+  //show route
 app.get("/:id", (req, res) => {
-    res.render('show.ejs', {
-        Product: product[req.params.id],
-        index: req.params.id
+    Products.findById(req.params.id, (error, foundProducts)=>{
+    res.render("show.ejs", {prod: foundProducts,
+        index: req.params.id})
     })
 })
    

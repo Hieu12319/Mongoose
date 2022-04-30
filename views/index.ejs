@@ -9,15 +9,18 @@
          <a href="/new">Add a Product</a>
      </h1>
     </nav>
-    
-     <h2> 
-    <ul>
-      <% for( let i = 0; i < allProducts.length; i++) { %>
-        <a href="/<%=i%>"><img src="<%= allProducts[i].img %>"></a>   
-    
-      <% } %>
-
-    </ul>
-    </h2>
+    <div class="container">
+      <ul>
+      <% allProducts.forEach(allProducts =>{ %>
+          <a class="product-container" href="/<%=allProducts._id%>">
+              <div class="data-container">
+                  <li><%=allProducts.name%></li> <br/>
+                  <img src="<%=allProducts.img%>" alt="<%=allProducts.name%>">
+                  Price: <%=allProducts.price%>
+             
+              <% }) %>  
+             </ul> 
+            </div>   
+             
   </body>
 </html>
